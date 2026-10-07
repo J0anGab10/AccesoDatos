@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<logs>
+    <log id="1">
+        <nivel>INFO</nivel>
+        <mensaje>Sesión iniciada correctamente</mensaje>
+        <usuario>Antonio</usuario>
+    </log>
+    <log id="2">
+        <nivel>WARNING</nivel>
+        <mensaje>Intento de acceso fallido</mensaje>
+        <usuario>Andrea</usuario>
+    </log>
+    <log id="3">
+        <nivel>ERROR</nivel>
+        <mensaje>Archivo confidencial modificado sin autorización</mensaje>
+        <usuario>Ana</usuario>
+    </log>
+</logs>
