@@ -1,0 +1,2 @@
+[INFO] Inicio de registro de actividad.
+[INFO] Registro generado correctamente.
