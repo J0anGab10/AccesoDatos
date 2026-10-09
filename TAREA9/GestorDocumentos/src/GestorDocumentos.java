@@ -3,6 +3,10 @@
  */
 
 import java.io.*;
+import javax.xml.parsers.*;
+import javax.xml.transform.*;
+import javax.xml.transform.stream.*;
+import org.w3c.dom.*;
 
 public class GestorDocumentos {
     public static final String DIRECTORIO = "Biblioteca";
@@ -18,7 +22,7 @@ public class GestorDocumentos {
 
     // Funciones a crear...
 
-    // EJERCICIO 1 : Operaciones con archivos y direcotorios
+    // EJERCICIO 1 : Operaciones con archivos y directorios
     // Ejercicio 1.1
     public static void crearFichero(String nombre) {
         File directorio = new File(nombre);
@@ -87,9 +91,219 @@ public class GestorDocumentos {
 
     // EJERCICIO 3 : Operaciones adicionales sobre el archivo
     // Ejercicio 3.1
-    public static void contarPalabras() {
+    // Lee el archivo línea a línea y suma las palabras separadas por espacios.
+    public static void contarPalabras(String archivo) {
+        int contador = 0;
 
+        try {
+            FileReader leer = new FileReader(archivo);
+            BufferedReader buffer = new BufferedReader(leer);
+            String linea;
+
+            while ((linea = buffer.readLine()) != null) {
+                String[] palabras = linea.trim().split("\\s+");
+
+                if (!linea.trim().isEmpty()) {
+                    contador += palabras.length;
+                }
+            }
+            System.out.println("Número de palabras: " + contador);
+            buffer.close();
+        } catch (IOException e) {
+            System.out.println("Error al leer el fichero: " + e.getMessage());
+        }
+    }
+    // Ejercicio 3.2
+    // Copia el contenido línea a línea sin cargar el archivo entero en memoria.
+    public static void copiarFichero(String archivoOrigen, String archivoDestino) {
+
+        try {
+            FileReader leer = new FileReader(archivoOrigen);
+            BufferedReader buffer = new BufferedReader(leer);
+
+            FileWriter escribir = new FileWriter(archivoDestino);
+            BufferedWriter bufferEscritura = new BufferedWriter(escribir);
+
+            String linea;
+            while ((linea = buffer.readLine()) != null) {
+                bufferEscritura.write(linea);
+                bufferEscritura.newLine();
+            }
+            System.out.println("Copia creada correctamente.");
+
+            buffer.close();
+            bufferEscritura.close();
+        } catch (IOException e) {
+            System.out.println("Error al copiar el fichero: " + e.getMessage());
+        }
+    }
+
+    // EJERCICIO 4: ACCESO ALEATORIO AL ARCHIVO
+
+    // Busca el tercer libro y reemplaza su título directamente en el archivo.
+    public static void modificarLibro(String archivo) {
+
+        try {
+            RandomAccessFile fichero = new RandomAccessFile(archivo, "rw");
+
+            String linea;
+            long posicion;
+
+            while (true) {
+
+                // Guarda el inicio de la línea para poder volver a esa posición.
+                posicion = fichero.getFilePointer();
+                linea = fichero.readLine();
+
+                if (linea == null) {
+                    break;
+                }
+
+                if (linea.equals("Tercer libro: Codex Gigas")) {
+
+                    // Salta el prefijo para sobrescribir solo el título del libro.
+                    fichero.seek(posicion + "Tercer libro: ".length());
+
+                    // Los dos nombres tienen la misma longitud
+                    fichero.write("Codex Major".getBytes());
+
+                    System.out.println("Libro modificado correctamente");
+                    break;
+                }
+            }
+
+            fichero.close();
+
+        } catch (IOException e) {
+            System.out.println("Error al modificar el fichero: " + e.getMessage());
+        }
     }
 
 
+    // EJERCICIO 5: LECTURA DE UN ARCHIVO XML CON DOM
+
+    // Lee el XML y muestra los títulos, aceptando las etiquetas titulo o title.
+    public static void leerXML(String archivo) {
+
+        try {
+            // DOM carga el XML como un árbol para poder buscar sus elementos.
+            DocumentBuilderFactory fabrica =
+                    DocumentBuilderFactory.newInstance();
+
+            DocumentBuilder constructor =
+                    fabrica.newDocumentBuilder();
+
+            Document documento = constructor.parse(new File(archivo));
+
+            documento.getDocumentElement().normalize();
+
+            NodeList titulos =
+                    documento.getElementsByTagName("titulo");
+
+            // Acepta XML que use el nombre del título en español o en inglés.
+            if (titulos.getLength() == 0) {
+                titulos = documento.getElementsByTagName("title");
+            }
+
+            System.out.println("Titulos del catalogo XML:");
+
+            for (int i = 0; i < titulos.getLength(); i++) {
+                System.out.println(titulos.item(i).getTextContent());
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al leer el XML: " + e.getMessage());
+        }
+    }
+
+
+    // EJERCICIO 6: TRANSFORMACION DE XML A HTML
+
+    // Ejercicio 6.1: crear la hoja de estilo XSL
+    // Crea una hoja XSL que convierte los datos de libros del XML en una lista HTML.
+    public static void crearXSL(String archivo) {
+
+        try {
+            FileWriter escribir = new FileWriter(archivo);
+            BufferedWriter buffer = new BufferedWriter(escribir);
+
+            buffer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            buffer.newLine();
+
+            buffer.write("<xsl:stylesheet version=\"1.0\" ");
+            buffer.write("xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">");
+            buffer.newLine();
+
+            buffer.write("<xsl:output method=\"html\" encoding=\"UTF-8\"/>");
+            buffer.newLine();
+
+            buffer.write("<xsl:template match=\"/\">");
+            buffer.newLine();
+
+            buffer.write("<html><head><title>Catalogo de libros</title></head>");
+            buffer.write("<body><h1>Catalogo de libros</h1><ul>");
+            buffer.newLine();
+
+            buffer.write("<xsl:for-each select=\"//*[local-name()='libro']\">");
+            buffer.newLine();
+
+            buffer.write("<li><b>Titulo: </b>");
+            buffer.write("<xsl:value-of select=\"*[local-name()='titulo' or local-name()='title'][1]\"/>");
+            buffer.newLine();
+
+            buffer.write("<br/><b>Autor: </b>");
+            buffer.write("<xsl:value-of select=\"*[local-name()='autor' or local-name()='author'][1]\"/>");
+            buffer.newLine();
+
+            buffer.write("</li>");
+            buffer.newLine();
+
+            buffer.write("</xsl:for-each>");
+            buffer.newLine();
+
+            buffer.write("</ul></body></html>");
+            buffer.newLine();
+
+            buffer.write("</xsl:template>");
+            buffer.newLine();
+
+            buffer.write("</xsl:stylesheet>");
+
+            buffer.close();
+
+            System.out.println("Archivo XSL creado correctamente");
+
+        } catch (IOException e) {
+            System.out.println("Error al crear el XSL: " + e.getMessage());
+        }
+    }
+
+    // Ejercicio 6.2: transformar XML a HTML
+    // Aplica la hoja XSL al XML y guarda el resultado como un archivo HTML.
+    public static void transformarXML(
+            String archivoXML, String archivoXSL, String archivoHTML) {
+
+        try {
+            TransformerFactory fabrica = TransformerFactory.newInstance();
+
+            // Crea el transformador a partir de la hoja XSL indicada.
+            Transformer transformador = fabrica.newTransformer(
+                    new StreamSource(new File(archivoXSL))
+            );
+
+            // Aplica la XSL al XML y guarda el resultado en el archivo HTML.
+            transformador.transform(
+                    new StreamSource(new File(archivoXML)),
+                    new StreamResult(new File(archivoHTML))
+            );
+
+            System.out.println("Archivo HTML creado correctamente");
+
+        } catch (TransformerException e) {
+            System.out.println("Error al transformar el XML: " + e.getMessage());
+        }
+    }
 }
+
+
+
