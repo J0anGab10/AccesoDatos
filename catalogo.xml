@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogo>
+    <libro>
+        <titulo>Don Quijote de la Mancha</titulo>
+        <autor>Miguel de Cervantes</autor>
+        <prestamo>Juan Pérez</prestamo>
+    </libro>
+    <libro>
+        <titulo>La Celestina</titulo>
+        <autor>Fernando de Rojas</autor>
+        <prestamo>María García</prestamo>
+    </libro>
+    <libro>
+        <titulo>Cien años de soledad</titulo>
+        <autor>Gabriel García Márquez</autor>
+        <prestamo>Luis Sánchez</prestamo>
+    </libro>
+</catalogo>

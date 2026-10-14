@@ -1,0 +1,20 @@
+Título: Don Quijote de la Mancha
+Autor: Miguel de Cervantes
+Préstamo: Prestado a Juan Pérez
+Fecha de Préstamo: 05/09/2024
+Información adicional: Publicada en dos partes (1605 y 1615), esta obra maestra es una sátira de las novelas de caballería y se considera una de las obras literarias más influyentes de todos los tiempos. Don Quijote, un hidalgo manchego, decide convertirse en caballero andante para restaurar la justicia en el mundo, acompañado de su fiel escudero Sancho Panza.
+
+Título: La Celestina
+Autor: Fernando de Rojas
+Préstamo: Prestado a María García
+Fecha de Préstamo: 18/08/2024
+Información adicional: Escrita a finales del siglo XV, esta tragicomedia narra la historia de los amores entre Calisto y Melibea, orquestados por una vieja alcahueta llamada Celestina. Es una obra crucial en el tránsito entre la Edad Media y el Renacimiento en la literatura española.
+
+Título: Cien años de soledad
+Autor: Gabriel García Márquez
+Préstamo: Prestado a Luis Sánchez
+Fecha de Préstamo: 23/07/2024
+Información adicional: Aunque escrita por el colombiano Gabriel García Márquez, esta obra es fundamental en el canon literario hispano. Narra la historia de la familia Buendía en el pueblo ficticio de Macondo, utilizando el realismo mágico para explorar temas como el tiempo, la soledad y el destino.
+Primer libro: Manuscrito Voynich
+Segundo libro: El Necronomicón
+Tercer libro: Codex Gigas

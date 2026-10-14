@@ -1,0 +1,12 @@
+REGISTROS:
+[INFO] Inicio del sistema.
+[WARNING] Se ha detectado un posible intento de acceso no autorizado desde la IP 192.168.1.45.
+[INFO] Análisis de patrones de tráfico en curso.
+[ALERT] Se ha identificado un archivo infectado por virus en el equipo 192.168.1.32.
+[INFO] Proceso de cuarentena iniciado correctamente.
+[ERROR] Falla en la actualización de firmas.
+[INFO] Escaneo completado sin nuevos incidentes.
+[ALERT] Detección de virus en el dispositivo externo USB001.
+[INFO] Proceso de limpieza ejecutado.
+[WARNING] Intento de conexión bloqueado por el firewall.
+[INFO] Registro de auditoría finalizado correctamente.
