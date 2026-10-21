@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * @author Juan Gabriel Galarza Claros
+ */
+
 public class ConsultaSELECT {
 
     // Constantes de conexión a la base de datos
@@ -15,7 +19,7 @@ public class ConsultaSELECT {
 
     public static void main(String[] args) {
         // Consulta original solicitada en el enunciado
-        String sql = "SELECT CODIGO_AGENTE, NOMBRE_AGENTE, FRASE_CLAVE FROM AGENTES;";
+        String sql = "SELECT CODIGO_AGENTE, NOMBRE_AGENTE, FRASE_CLAVE FROM agentes;";
 
         // Apertura de recursos con try-with-resources para su cierre automático
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
