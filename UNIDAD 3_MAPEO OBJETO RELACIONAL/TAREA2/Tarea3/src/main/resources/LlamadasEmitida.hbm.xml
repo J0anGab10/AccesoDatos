@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <!-- Cambia org.example por el paquete de tu proyecto si es distinto -->
+    <class name="org.example.LlamadasEmitida" table="LLAMADAS_EMITIDAS">
+
+        <id name="id" column="CODIGO_LLAMADA" type="int">
+            <generator class="assigned" />
+        </id>
+
+        <!-- TODO: añade aquí una <property> por cada columna que falta -->
+        <property name="simLlamante" column="SIM_LLAMANTE" type="int"/>
+        <property name="numerosLlamado" column="NUMERO_LLAMADO" type="int"/>
+        <property name="duracionLlamada" column="DURACION_LLAMADA" type="int"/>
+        <property name="importeLlamada" column="IMPORTE_LLAMADA" type="float"/>
+    </class>
+</hibernate-mapping>
