@@ -2,6 +2,10 @@ package org.example;
 
 import jakarta.persistence.*;
 
+/**
+ * @author Juan Gabriel Galarza Claros
+ */
+
 @Entity
 @Table(name = "LLAMADAS_EMITIDAS")
 public class LlamadaEmitida {
@@ -62,4 +66,12 @@ public class LlamadaEmitida {
         this.importeLlamada = importeLlamada;
     }
 
+    @Override
+    public String toString() {
+        return "LlamadaEmitida{id=" + id
+                + ", sim=" + (simLlamante != null ? simLlamante.getId() : null)
+                + ", destino=" + numeroLlamado
+                + ", duracion=" + duracionLlamada + "s"
+                + ", importe=" + importeLlamada + " €}";
+    }
 }

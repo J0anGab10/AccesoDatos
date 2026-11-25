@@ -1,9 +1,12 @@
 package org.example;
 
 import jakarta.persistence.*;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+/**
+ * @author Juan Gabriel Galarza Claros
+ */
 
 @Entity
 @Table(name = "TARJETAS_TELEFONICAS")
@@ -43,4 +46,8 @@ public class TarjetaTelefonica {
         this.llamadaEmitidas = llamadaEmitidas;
     }
 
+    @Override
+    public String toString() {
+        return "TarjetaTelefonica{sim=" + id + "}";
+    }
 }

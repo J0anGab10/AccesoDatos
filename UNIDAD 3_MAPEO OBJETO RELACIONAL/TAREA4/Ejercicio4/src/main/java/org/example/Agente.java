@@ -5,6 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * @author Juan Gabriel Galarza Claros
+ */
+
 @Entity
 @Table(name = "AGENTES")
 public class Agente {
@@ -42,4 +46,8 @@ public class Agente {
         this.fraseClave = fraseClave;
     }
 
+    @Override
+    public String toString() {
+        return "Agente{id=" + id + ", nombreAgente='" + nombreAgente + "'}";
+    }
 }
