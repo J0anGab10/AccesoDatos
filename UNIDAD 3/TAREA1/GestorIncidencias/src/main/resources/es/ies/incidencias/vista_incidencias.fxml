@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Importaciones de los controles y contenedores de JavaFX -->
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import java.lang.String?>
+
+<!-- Contenedor principal enlazado con el controlador -->
+<BorderPane prefWidth="800.0" prefHeight="550.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="es.ies.incidencias.IncidenciasController">
+
+    <!-- Grupo no visual para unir los botones de radio -->
+    <fx:define>
+        <ToggleGroup fx:id="grupoUrgencia" />
+    </fx:define>
+
+    <!-- Zona superior con el titulo, el contador y el boton de vaciar todo -->
+    <top>
+        <HBox spacing="20.0" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="15.0" right="15.0" bottom="15.0" left="15.0" />
+            </padding>
+            <children>
+                <Label text="Gestor de Incidencias del Aula" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                <Label fx:id="lblContador" text="Incidencias abiertas: 0" style="-fx-font-size: 14px;" />
+                <Button text="Resolver todas" onAction="#resolverTodas" />
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Zona central con el formulario de entrada de datos -->
+    <center>
+        <GridPane hgap="10.0" vgap="10.0">
+            <padding>
+                <Insets top="15.0" right="15.0" bottom="15.0" left="15.0" />
+            </padding>
+
+            <!-- Ancho de las dos columnas del formulario -->
+            <columnConstraints>
+                <ColumnConstraints prefWidth="140.0" />
+                <ColumnConstraints prefWidth="500.0" />
+            </columnConstraints>
+
+            <children>
+                <!-- Campo para escribir el equipo o puesto -->
+                <Label text="Equipo:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <TextField fx:id="txtEquipo"  GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                <!-- Desplegable de categorias cargado desde XML -->
+                <Label text="Categoría:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <ComboBox fx:id="cmbCategoria" prefWidth="200.0" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Hardware" />
+                            <String fx:value="Software" />
+                            <String fx:value="Red" />
+                            <String fx:value="Proyector/Periféricos" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+
+                <!-- Botones de radio enlazados al mismo grupo -->
+                <Label text="Nivel de Urgencia:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <HBox spacing="15.0" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                    <children>
+                        <RadioButton fx:id="rbBaja" text="Baja" toggleGroup="$grupoUrgencia" />
+                        <RadioButton fx:id="rbMedia" text="Media" toggleGroup="$grupoUrgencia" />
+                        <RadioButton fx:id="rbAlta" text="Alta" toggleGroup="$grupoUrgencia" />
+                    </children>
+                </HBox>
+
+                <!-- Area de texto para detallar la incidencia -->
+                <Label text="Descripción:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                <TextArea fx:id="txtDescripcion" prefRowCount="3" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+
+                <!-- Botones para guardar o limpiar los campos -->
+                <HBox spacing="10.0" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                    <children>
+                        <Button text="Registrar Incidencia" onAction="#registrarIncidencia" />
+                        <Button text="Limpiar Formulario" onAction="#limpiarFormulario" />
+                    </children>
+                </HBox>
+            </children>
+        </GridPane>
+    </center>
+
+    <!-- Zona inferior con scroll donde se apilan las tarjetas creadas en Java -->
+    <bottom>
+        <ScrollPane prefHeight="200.0" fitToWidth="true">
+            <content>
+                <VBox fx:id="vboxIncidencias" spacing="8.0">
+                    <padding>
+                        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </bottom>
+
+</BorderPane>
